@@ -17,6 +17,27 @@ LOG="/tmp/linux-log.txt"
 echo "--- START OF LOG ---" >> $LOG
 touch /tmp/linux-log.txt ; echo "Log created in: /tmp/linux-log.txt" ; echo -e "\n" >> $LOG
 
+# Log general information
+# uname
+echo "uname:" >> $LOG
+uname -a >> $LOG
+echo -e "\n" >> $LOG
+
+# hostname
+echo "hostname:" >> $LOG
+hostname >> $LOG
+echo -e "\n" >> $LOG
+
+# IP Address
+echo "IP information:" >> $LOG
+ifconfig | grep 172 | sed -e 's/^[[:space:]]*//' >> $LOG # CCDC uses 172.(Hidden).X.X (netmask: 255.255.0.0)
+echo -e "\n" >> $LOG
+
+# MAC address
+echo "MAC Address:" >> $LOG
+ip -o link | grep -E 'eth[0-4]' | grep -Po 'ether \K[^ ]*' >> $LOG
+echo -e "\n" >> $LOG
+
 # Log /etc/passwd
 echo "Contents of /etc/passwd:" >> $LOG
 cat /etc/passwd >> $LOG
