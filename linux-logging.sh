@@ -57,7 +57,7 @@ echo -e "\n" >> $LOG
 echo "Contents of /etc/sudoers:" >> $LOG
 cat /etc/sudoers >> $LOG
 echo -e "\nVerify the correct accounts have full permissions:" >> $LOG
-cat /etc/sudoers | grep "ALL = (ALL) ALL" >> $LOG
+cat /etc/sudoers | grep -E "ALL = (ALL) ALL|ALL=(ALL:ALL) ALL" >> $LOG
 echo -e "\n" >> $LOG
 
 # Log /etc/shadow
